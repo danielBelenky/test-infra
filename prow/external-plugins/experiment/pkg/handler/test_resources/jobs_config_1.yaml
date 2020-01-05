@@ -1,0 +1,46 @@
+---
+presubmits:
+  org/repo:
+    - name: dummy-1
+      decorate: true
+      always_run: true
+      skip_report: true
+      max_concurrency: 10
+      spec:
+        nodeSelector:
+          type: some-selector
+        containers:
+          - image: foo
+            command:
+              - run_tests
+            securityContext:
+              privileged: true
+    - name: dummy-2
+      decorate: true
+      always_run: true
+      skip_report: true
+      max_concurrency: 10
+      spec:
+        nodeSelector:
+          type: some-selector
+        containers:
+          - image: foo
+            command:
+              - run_tests
+            securityContext:
+              privileged: true
+  org/repo2:
+    - name: dummy-1
+      decorate: true
+      always_run: true
+      skip_report: true
+      max_concurrency: 10
+      spec:
+        nodeSelector:
+          type: some-selector
+        containers:
+          - image: foo
+            command:
+              - run_tests
+            securityContext:
+              privileged: true

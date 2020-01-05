@@ -1,0 +1,48 @@
+---
+plank:
+  job_url_prefix: https://test-jobs/
+  pod_pending_timeout: 60m
+  default_decoration_config:
+    timeout: 2h
+    grace_period: 15s
+    utility_images:
+      clonerefs: "gcr.io/k8s-prow/clonerefs"
+      initupload: "gcr.io/k8s-prow/initupload"
+      entrypoint: "gcr.io/k8s-prow/entrypoint"
+      sidecar: "gcr.io/k8s-prow/sidecar"
+    gcs_configuration:
+      bucket: "tests"
+      path_strategy: "explicit"
+    gcs_credentials_secret: "gcs"
+
+
+#deck:
+#  spyglass:
+#    size_limit: 500000000 # 500MB
+#    gcs_browser_prefix: https://gcsweb.apps.ovirt.org/gcs/
+#    viewers:
+#      "started.json|finished.json":
+#        - "metadata"
+#      "build-log.txt":
+#        - "buildlog"
+#      "artifacts/junit.*\\.xml":
+#        - "junit"
+#      "artifacts/filtered.cov":
+#        - "coverage"
+
+sinker:
+  resync_period: 1m
+  max_prowjob_age: 48h
+  max_pod_age: 30m
+
+prowjob_namespace: prowjobs
+pod_namespace: prowjobs
+log_level: debug
+
+
+presets:
+  - labels:
+      fake-label: "true"
+    env:
+      - name: FOO_VAR
+        value: "true"

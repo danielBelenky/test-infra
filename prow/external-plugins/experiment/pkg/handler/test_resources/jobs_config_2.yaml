@@ -1,0 +1,17 @@
+---
+presubmits:
+  some/repo:
+    - name: dummy-11
+      decorate: true
+      always_run: true
+      skip_report: true
+      max_concurrency: 10
+      spec:
+        nodeSelector:
+          type: some-selector
+        containers:
+          - image: bar
+            command:
+              - run_tests
+            securityContext:
+              privileged: true
